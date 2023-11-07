@@ -1,7 +1,9 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
+    id("com.google.devtools.ksp")
+    //important: use ksp, not kapt
+    //id("kotlin-kapt")
 }
 
 android {
@@ -49,7 +51,9 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata:2.6.2")
     implementation("androidx.room:room-runtime:2.6.0")
     implementation("androidx.room:room-ktx:2.6.0")
-    kapt("androidx.room:room-compiler:2.6.0")
+    //kapt("androidx.room:room-compiler:2.4.1")
+    //important: use ksp, not kapt
+    ksp("androidx.room:room-compiler:2.6.0")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
