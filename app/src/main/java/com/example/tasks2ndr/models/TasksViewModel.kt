@@ -10,12 +10,14 @@ import kotlinx.coroutines.launch
 class TasksViewModel(val dao: TaskDao) : ViewModel(){
     var newTaskName = ""
 
+    /*
     private val tasks = dao.getAll()
-
     //Use tasks.map to replace Transformations.map(tasks)
     val tasksString = tasks.map {
         tasks -> formatTasks(tasks)
     }
+     */
+    val tasks = dao.getAll()
     fun addTask() {
         viewModelScope.launch {
             val task = Task()
@@ -24,6 +26,7 @@ class TasksViewModel(val dao: TaskDao) : ViewModel(){
         }
     }
 
+    /*
     fun formatTasks(tasks: List<Task>): String {
         return tasks.fold("") {
             str, item -> str + '\n' + formatTask(item)
@@ -36,4 +39,5 @@ class TasksViewModel(val dao: TaskDao) : ViewModel(){
         str += '\n' + "Complete: ${task.taskDone}" + '\n'
         return str
     }
+     */
 }
