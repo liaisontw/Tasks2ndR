@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.tasks2ndr.adapters.TaskItemAdapter
 import com.example.tasks2ndr.databinding.FragmentTasksBinding
 import com.example.tasks2ndr.models.TaskDatabase
@@ -34,7 +35,8 @@ class TasksFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
 
         val adapter = TaskItemAdapter { taskId ->
-            Toast.makeText(context, "Clicked task $taskId", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "Clicked task $taskId", Toast.LENGTH_SHORT).show()
+            viewModel.onTaskClicked(taskId)
         }
         binding.tasksList.adapter = adapter
 
@@ -42,6 +44,15 @@ class TasksFragment : Fragment() {
             it?.let {
                 //adapter.data = it
                 adapter.submitList(it)
+            }
+        })
+
+        viewModel.navigateToTask.observe(viewLifecycleOwner, Observer {taskId ->
+            taskId?.let {
+                val action = TasksFragmentDirections
+                    .actionTasksFragmentToEditTaskFragment(taskId)
+                this.findNavController().navigate(action)
+                viewModel.onTaskNavigated()
             }
         })
 

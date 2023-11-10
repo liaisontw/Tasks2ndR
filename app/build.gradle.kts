@@ -4,6 +4,7 @@ plugins {
     id("com.google.devtools.ksp")
     //important: use ksp, not kapt
     //id("kotlin-kapt")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -53,6 +54,7 @@ dependencies {
     implementation("androidx.room:room-ktx:2.6.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.cardview:cardview:1.0.0")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.5.0")
     //kapt("androidx.room:room-compiler:2.4.1")
     //important: use ksp, not kapt
     ksp("androidx.room:room-compiler:2.6.0")
